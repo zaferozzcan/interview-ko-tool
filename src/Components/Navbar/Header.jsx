@@ -13,12 +13,18 @@ export default class Header extends Component {
   render() {
     return (
       <Navbar bg="dark" variant="dark" className="navbar-container">
-        <Navbar.Brand href="#home">IqsBucket </Navbar.Brand>
+        <Link to={"/"}>
+          <Navbar.Brand>IqsBucket </Navbar.Brand>
+        </Link>
         <Nav className="mr-auto">
           {this.props.user_id ? (
             <>
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Quiz</Nav.Link>
+              <Link to={"/home"}>
+                <Nav.Link>Home</Nav.Link>
+              </Link>
+              <Link to={"/quiz"}>
+                <Nav.Link>Quiz</Nav.Link>
+              </Link>
             </>
           ) : null}
         </Nav>

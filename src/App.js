@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import SignIn from "./Components/Auth/SignIn";
 import Landing from "./Components/Landing/Landing";
 import Navbar from "./Components/Navbar/Header";
+import SignUp from "./Components/Auth/SignUp";
 
 export default class App extends Component {
   constructor(props) {
@@ -14,10 +16,14 @@ export default class App extends Component {
   render() {
     return (
       <div className="container">
-        <Route exact path="/" component={(Landing, Navbar)}>
-          <Navbar user_id={this.state.user_id} />
-          <Landing />
-        </Route>
+        <Navbar user_id={this.state.user_id} />
+        <Switch>
+          <Route exact path="/" component={(Landing, Navbar)}>
+            <Landing />
+          </Route>
+          <Route path={"/sign-in"} component={SignIn}></Route>
+          <Route path={"/sign-up"} component={SignUp}></Route>
+        </Switch>
       </div>
     );
   }
