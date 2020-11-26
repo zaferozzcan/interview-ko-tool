@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class SignIn extends Component {
       lastName: "",
       email: "",
       password: "",
+      technology: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,12 +26,17 @@ export default class SignIn extends Component {
     this.setState({
       [e.target.id]: e.target.value,
     });
+
+    axios
+      .post("http://localhost:3040/u/signup", this.state)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 
   render() {
     return (
       <div className="sign-in-container">
-        <Form onSubmit={this.handleSubmit}>
+        <Form>
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -67,7 +74,7 @@ export default class SignIn extends Component {
               placeholder="Password"
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button onClick={this.handleSubmit} variant="primary" type="button">
             Submit
           </Button>
         </Form>
