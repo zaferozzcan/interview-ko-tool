@@ -24,6 +24,7 @@ export default class SignIn extends Component {
       .post("http://localhost:3040/u/signup", this.state)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
+
     this.setState({
       name: "",
       lastName: "",
@@ -41,7 +42,7 @@ export default class SignIn extends Component {
   render() {
     return (
       <div className="sign-in-container">
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -79,7 +80,7 @@ export default class SignIn extends Component {
               placeholder="Password"
             />
           </Form.Group>
-          <Button onClick={this.handleSubmit} variant="primary" type="button">
+          <Button variant="primary" type="submit">
             Submit
           </Button>
         </Form>

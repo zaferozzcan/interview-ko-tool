@@ -17,20 +17,18 @@ export default class Header extends Component {
           <Navbar.Brand>IqsBucket </Navbar.Brand>
         </Link>
         <Nav className="mr-auto">
-          {this.props.user_id ? (
+          {this.props.user.length ? (
             <>
-              <Link to={"/home"}>
-                <Nav.Link>Home</Nav.Link>
-              </Link>
-              <Link to={"/quiz"}>
-                <Nav.Link>Quiz</Nav.Link>
-              </Link>
+              <Link to={"/home"}>Home</Link>
+              <Link to={"/quiz"}>Quiz</Link>
             </>
           ) : null}
         </Nav>
-        <Nav.Link href="/sign-in" className="mr-sm-1">
-          Sign In
-        </Nav.Link>
+        {this.props.user.length ? (
+          <Link to="/sign-out">Sign Out</Link>
+        ) : (
+          <Link to={"/sign-in"}>Sign In</Link>
+        )}
       </Navbar>
     );
   }

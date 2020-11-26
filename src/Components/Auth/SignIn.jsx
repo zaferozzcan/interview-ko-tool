@@ -18,7 +18,7 @@ export default class SignIn extends Component {
     e.preventDefault();
     axios
       .post("http://localhost:3040/u/login", this.state)
-      .then((res) => console.log(res))
+      .then((res) => localStorage.setItem("token", res.data.accessToken))
       .catch((err) => console.log(err));
     this.setState({
       email: "",

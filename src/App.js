@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import SignIn from "./Components/Auth/SignIn";
@@ -9,14 +10,26 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: "",
+      user: [],
     };
   }
 
+  componentDidMount() {
+    axios
+      .get("http://localhost:3040/u")
+      .then((res) =>
+        this.setState({
+          user: res.data,
+        })
+      )
+      .catch((err) => console.log(err));
+  }
+
   render() {
+    console.log(this.state.user);
     return (
       <div className="container">
-        <Navbar user_id={this.state.user_id} />
+        <Navbar user={this.state.user} />
         <Switch>
           <Route exact path="/" component={(Landing, Navbar)}>
             <Landing />
