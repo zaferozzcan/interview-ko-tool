@@ -20,17 +20,22 @@ export default class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    alert("submits");
+    axios
+      .post("http://localhost:3040/u/signup", this.state)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    this.setState({
+      name: "",
+      lastName: "",
+      email: "",
+      password: "",
+      technology: [],
+    });
   }
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value,
     });
-
-    axios
-      .post("http://localhost:3040/u/signup", this.state)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
   }
 
   render() {

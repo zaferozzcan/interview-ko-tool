@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -15,7 +16,14 @@ export default class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    alert("submits");
+    axios
+      .post("http://localhost:3040/u/login", this.state)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    this.setState({
+      email: "",
+      password: "",
+    });
   }
   handleChange(e) {
     this.setState({
