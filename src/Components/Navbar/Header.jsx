@@ -25,7 +25,9 @@ export default class Header extends Component {
           ) : null}
         </Nav>
         {this.props.user.length ? (
-          <Link to="/sign-out">Sign Out</Link>
+          <Link onClick={() => localStorage.clear()} to={"/"}>
+            Sign Out
+          </Link>
         ) : (
           <Link to={"/sign-in"}>Sign In</Link>
         )}

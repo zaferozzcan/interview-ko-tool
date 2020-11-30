@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -11,7 +10,6 @@ export default class SignIn extends Component {
       lastName: "",
       email: "",
       password: "",
-      technology: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,19 +18,32 @@ export default class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios
-      .post("http://localhost:3040/u/signup", this.state)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
 
-    this.setState({
-      name: "",
-      lastName: "",
-      email: "",
-      password: "",
-      technology: [],
-    });
+    fetch("http://localhost:3040/u/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        name: this.state.name,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+        technology: [],
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          name: "",
+          lastName: "",
+          email: "",
+          password: "",
+        });
+      });
   }
+
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value,
@@ -40,6 +51,7 @@ export default class SignIn extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="sign-in-container">
         <Form onSubmit={this.handleSubmit}>

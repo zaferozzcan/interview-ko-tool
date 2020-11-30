@@ -9,6 +9,7 @@ export default class SignIn extends Component {
     this.state = {
       email: "",
       password: "",
+      loggedIn: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
