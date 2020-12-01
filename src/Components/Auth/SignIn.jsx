@@ -1,72 +1,67 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import Axios from "axios";
+import UserContext from "../../context/UserContext";
 
-export default class SignIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      loggedIn: false,
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+export default function SignIn() {
+  const { setData, setUserData } = useContext(UserContext);
+  const { loginUser, setLoginUser } = useState({
+    email: "",
+    password: "",
+  });
 
-  handleSubmit(e) {
-    console.log("submitted");
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3040/u/login", this.state)
-      .then((res) => console.log(res))
-      .then(() => {
-        this.setState({
-          email: "",
-          password: "",
-          loggedIn: true,
-        });
-      })
-      .catch((err) => console.log(err));
-  }
-  handleChange(e) {
-    this.setState({
+    try {
+      const loginUser = { email, password };
+      const loginRes = await Axios.post(
+        "http://localhost:3040/u/login",
+        loginUser
+      );
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem("auth-token", loginRes.data.token);
+      history.push("/");
+    } catch (err) {
+      // err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
+
+  function handleChange(e) {
+    setLoginUser({
       [e.target.id]: e.target.value,
     });
   }
+  return (
+    <div className="sign-in-container">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            onChange={this.handleChange}
+            type="email"
+            placeholder="Enter email"
+          />
+        </Form.Group>
 
-  render() {
-    return (
-      <div className="sign-in-container">
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              value={this.state.email}
-              onChange={this.handleChange}
-              type="email"
-              placeholder="Enter email"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-          <Form.Text className="text-muted">
-            Are you new around here? <Link to={"/sign-up"}>Register</Link>
-          </Form.Text>
-        </Form>
-      </div>
-    );
-  }
+        <Form.Group controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        <Form.Text className="text-muted">
+          Are you new around here? <Link to={"/sign-up"}>Register</Link>
+        </Form.Text>
+      </Form>
+    </div>
+  );
 }

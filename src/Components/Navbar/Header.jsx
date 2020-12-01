@@ -18,14 +18,14 @@ export default function Header() {
           <Navbar.Brand>IqsBucket </Navbar.Brand>
         </Link>
         <Nav className="mr-auto">
-          {true ? (
+          {userData ? (
             <>
               <Link to={"/home"}>Home</Link>
               <Link to={"/quiz"}>Quiz</Link>
             </>
           ) : null}
         </Nav>
-        {true ? (
+        {userData ? (
           <Link onClick={() => localStorage.clear()} to={"/"}>
             Sign Out
           </Link>
