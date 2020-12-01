@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-
-import React, { Component } from "react";
+import UserContext from "../../context/UserContext";
+import React, { Component, useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
@@ -9,22 +9,23 @@ import Nav from "react-bootstrap/Nav";
 // import FormControl from "react-bootstrap/FormControl";
 // import Button from "react-bootstrap/Button";
 
-export default class Header extends Component {
-  render() {
-    return (
+export default function Header() {
+  const { userData, setUserData } = useContext(UserContext);
+  return (
+    <div>
       <Navbar bg="dark" variant="dark" className="navbar-container">
         <Link to={"/"}>
           <Navbar.Brand>IqsBucket </Navbar.Brand>
         </Link>
         <Nav className="mr-auto">
-          {this.props.user.length ? (
+          {true ? (
             <>
               <Link to={"/home"}>Home</Link>
               <Link to={"/quiz"}>Quiz</Link>
             </>
           ) : null}
         </Nav>
-        {this.props.user.length ? (
+        {true ? (
           <Link onClick={() => localStorage.clear()} to={"/"}>
             Sign Out
           </Link>
@@ -32,6 +33,6 @@ export default class Header extends Component {
           <Link to={"/sign-in"}>Sign In</Link>
         )}
       </Navbar>
-    );
-  }
+    </div>
+  );
 }

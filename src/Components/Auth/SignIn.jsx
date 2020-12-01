@@ -16,15 +16,19 @@ export default class SignIn extends Component {
   }
 
   handleSubmit(e) {
+    console.log("submitted");
     e.preventDefault();
     axios
       .post("http://localhost:3040/u/login", this.state)
-      .then((res) => localStorage.setItem("token", res.data.accessToken))
+      .then((res) => console.log(res))
+      .then(() => {
+        this.setState({
+          email: "",
+          password: "",
+          loggedIn: true,
+        });
+      })
       .catch((err) => console.log(err));
-    this.setState({
-      email: "",
-      password: "",
-    });
   }
   handleChange(e) {
     this.setState({

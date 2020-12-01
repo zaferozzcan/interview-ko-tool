@@ -41,6 +41,7 @@ export default class SignIn extends Component {
           email: "",
           password: "",
         });
+        useHistory.push("/sign-in");
       });
   }
 
