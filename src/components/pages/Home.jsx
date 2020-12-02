@@ -1,12 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import Subject from "../Subject/Subject";
+import UserContext from "../../context/UserContext";
 
-export default class home extends Component {
-  render() {
-    return (
-      <div>
-        <Subject />
-      </div>
-    );
-  }
+export default function Home() {
+  const { userData, setUserData } = useContext(UserContext);
+  console.log(userData);
+  return <div>{userData.user && userData.user.id ? <Subject /> : null}</div>;
 }
