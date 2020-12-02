@@ -1,11 +1,11 @@
-import React, { Component, useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import SignIn from "./Components/Auth/SignIn";
-import Landing from "./Components/Landing/Landing";
-import Navbar from "./Components/Navbar/Header";
-import SignUp from "./Components/Auth/SignUp";
-import UserContext from "./context/UserContext";
 import Axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
+import Home from "./components/pages/Home";
+import Header from "./components/layout/Header";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import UserContext from "./context/UserContext";
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -36,20 +36,22 @@ export default function App() {
         });
       }
     };
+
     checkLoggedIn();
   }, []);
+
   return (
     <div>
-      <UserContext.Provider value={(userData, setUserData)}>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={(Landing, Navbar)}>
-            <Landing />
-          </Route>
-          <Route path={"/sign-in"} component={SignIn}></Route>
-          <Route path={"/sign-up"} component={SignUp}></Route>
-        </Switch>
-      </UserContext.Provider>
+      <>
+        <UserContext.Provider value={{ userData, setUserData }}>
+          <Header />
+          <Switch>
+            <Route exact path={"/"} component={Home} />
+            <Route exact path={"/login"} component={Login} />
+            <Route exact path={"/register"} component={Register} />
+          </Switch>
+        </UserContext.Provider>
+      </>
     </div>
   );
 }
