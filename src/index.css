@@ -168,7 +168,6 @@ body {
 }
 
 /* Subject-container */
-
 .subject-container {
   margin: 3rem 0 0 0;
   width: 100%;
@@ -178,19 +177,34 @@ body {
   align-items: center;
 }
 
+.subject-container-inner {
+}
+
 .subject-container-box {
   width: 90vw;
   height: 50vh;
   background-color: rgb(230, 227, 227);
 }
+.subject-holder {
+  width: 160vh;
+  height: 40vh;
+  background-color: rgb(177, 174, 174);
+  margin: 1rem auto;
+  z-index: 2;
+  box-shadow: 2px 2px 4px rgb(177, 174, 174);
+  opacity: 0.8;
+}
 
 /* TABS */
+
 .tabs-container {
   display: flex;
   justify-content: space-between;
 }
 .tab {
-  background-color: red;
+  background-color: #df4343;
   width: 20rem;
+  height: 1.7rem;
   text-align: center;
+  box-shadow: 0 1px 2px #df4343;
 }
