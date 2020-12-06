@@ -26,6 +26,11 @@ export default function Subject() {
             <button className="add-tech-button" type="button">
               Add
             </button>
+            <ul>
+              {subjects.map((subject) => {
+                return <li>{subject.name}</li>;
+              })}
+            </ul>
           </div>
         </div>
       </div>
