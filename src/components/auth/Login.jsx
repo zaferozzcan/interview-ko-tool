@@ -31,7 +31,6 @@ export default function Login() {
     }
   };
 
-  console.log(userData);
   return (
     <div className="page">
       <h2>Log in</h2>
