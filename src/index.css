@@ -194,7 +194,7 @@ body {
   box-shadow: 2px 2px 4px rgb(177, 174, 174);
   opacity: 0.8;
 }
-
+/* I need media query for the subject holder or apply bootstrap here */
 /* TABS */
 
 .tabs-container {
@@ -209,4 +209,50 @@ body {
   box-shadow: 0 1px 2px #df4343;
 }
 
-/* add etch button */
+/* add tech button */
+
+.show-tooltip {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 70px;
+  color: #fa5;
+  margin-bottom: 0;
+}
+
+#tooltip-form {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  display: inline;
+  background-color: #fa5;
+  color: white;
+  border: 1px solid #fa5;
+  padding: 10px 15px;
+  box-shadow: 0px 3px 2px #8d8d8d;
+  border-radius: 6px;
+}
+.close-tooltip {
+  right: 15px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  background: #fff;
+  color: #555;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.add-tech-button {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  font-size: 20px;
+  color: black;
+  margin: 0;
+}

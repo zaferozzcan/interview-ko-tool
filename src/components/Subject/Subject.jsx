@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import Tabs from "./tabs/Tabs";
 import UserContext from "../../context/UserContext";
+import ToolTipForm from "./tabs/ToolTipForm";
 
 export default function Subject() {
   const { userData, setUserData } = useContext(UserContext);
@@ -22,10 +23,11 @@ export default function Subject() {
       <div className="suject-container-inner">
         <div className="subject-container-box">
           <Tabs />
-          <div className="subject-holder">
+          <div className="subject-holder container">
             <button className="add-tech-button" type="button">
               Add
             </button>
+            <ToolTipForm />
             <ul>
               {subjects.map((subject) => {
                 return <li>{subject.name}</li>;
