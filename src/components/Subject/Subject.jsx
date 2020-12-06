@@ -7,7 +7,11 @@ export default function Subject() {
       <div className="suject-container-inner">
         <div className="subject-container-box">
           <Tabs />
-          <div className="subject-holder"></div>
+          <div className="subject-holder">
+            <button className="add-tech-button" type="button">
+              Add
+            </button>
+          </div>
         </div>
       </div>
     </div>
